@@ -1,0 +1,15 @@
+<div class="nested-fields" >
+ <div class= "field">
+    <%= f.label :body %>
+    <br>
+    <%= f.text_area :body ,placeholder: :"comments here" %>
+  <div class="field"> 
+   <%= f.label :stype,"info type" %><br>  
+   <%= f.radio_button(:stype,"info") %> "info"
+   <%= f.radio_button(:stype,"warning") %> "warning"
+   <%= f.radio_button(:stype,"success") %> "success"
+   <%= f.radio_button(:stype,"danger") %> "danger"
+   
+   </div>
+  <%= link_to_remove_association "remove task", f %>
+  </div>

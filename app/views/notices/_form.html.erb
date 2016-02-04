@@ -1,0 +1,46 @@
+<%= form_for(@notice) do |f| %>
+  <% if @notice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notice.errors.count, "error") %> prohibited this notice from being saved:</h2>
+
+      <ul>
+      <% @notice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :general %><br>
+    <%= f.check_box :general %>
+  </div>
+  <div class="field">
+    <%= f.label :dept %><br>
+    <%= f.select(:dept,["Math","chem","Physics"]) %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.select(:year,["First","Second","Third","Final"] )%>
+  </div>
+  <div class="field">
+    <%= f.label :semister %><br>
+    <%= f.select(:semister,["Fall","Winter","Summer"]) %>
+  </div>
+
+<div id ="messages">
+    <%= f.fields_for :messages do |task|%>
+     <%= render 'message_fields', f: task%>
+     <%end%>
+  
+    <%= link_to_add_association 'add task', f, :messages%>
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,106 @@
+== README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+Please feel free to use a different markup language if you do not plan to run
+<tt>rake doc:app</tt>.
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Notices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notices.each do |notice| %>
+    <%if notice.type=="normal"%>
+      <tr>
+        <td><%= notice.message %></td>
+        <% if notice.type == "details"%>
+        <%=subject for :notice.subjects %>
+        <%if subject.success?%>
+       <td> <%= subject.pass%></td>
+        <%else %>
+        <td><%=subject.fail%></td>
+        <%end%>
+         <%end%>
+
+        <%#=subject for :notice.subjects %>
+
+        <td><%= link_to 'Show', notice %></td>
+        <td><%= link_to 'Edit', edit_notice_path(notice) %></td>
+        <td><%= link_to 'Destroy', notice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notice', new_notice_path %>
+-------------------------------------------------------------------------------
+
+<%= form_for(@notice) do |f| %>
+  <% if @notice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notice.errors.count, "error") %> prohibited this notice from being saved:</h2>
+
+      <ul>
+      <% @notice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :message %><br>
+    <%= f.text_area :message %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.radio_button :type, "normal"%> "nomal"
+    <%= f.radio_button :type, "details" %>"details"
+  </div>
+  <div class="field">
+  <%=f.fields_for :subjects do|s|%>
+  <%=s.label :pass%><br>
+  <%=s.text_area :pass%><br>
+  <%=s.label :fail%><br>
+  <%=s.text_area :fail%><br>
+  <%=s.check_box :success%>"success"
+  <%end%>
+   
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

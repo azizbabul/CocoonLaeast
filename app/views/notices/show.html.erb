@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @notice.name %>
+</p>
+
+<p>
+  <strong>General:</strong>
+  <%= @notice.general %>
+</p>
+
+<p>
+  <strong>Dept:</strong>
+  <%= @notice.dept %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @notice.year %>
+</p>
+
+<p>
+  <strong>Semister:</strong>
+  <%= @notice.semister %>
+</p>
+<% for msg in @notice.messages %>
+
+<p>
+<h3><%=msg.body%></h3>
+<%end%>
+</p>
+
+<%= link_to 'Edit', edit_notice_path(@notice) %> |
+<%= link_to 'Back', notices_path %>
